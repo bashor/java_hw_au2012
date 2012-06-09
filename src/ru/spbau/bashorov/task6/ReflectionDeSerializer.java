@@ -1,7 +1,10 @@
 package ru.spbau.bashorov.task6;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -19,10 +22,15 @@ public class ReflectionDeSerializer {
      * @param clazz object class
      * @param <T> class type
      * @return DeSerialized object
-     * @throws Exception
+     * @throws IllegalSerializationException, FileNotFoundException
      */
-    public <T> T deserialize(String filename, Class<T> clazz) throws Exception {
-        T object = clazz.newInstance();
+    public <T> T deserialize(String filename, Class<T> clazz) throws IllegalSerializationException, FileNotFoundException {
+        T object;
+        try {
+            object = clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new IllegalSerializationException("Can not deserialize. Detail info: " + e.getMessage());
+        }
 
         Properties properties = new Properties();
 
@@ -30,9 +38,15 @@ public class ReflectionDeSerializer {
         try{
             reader = new FileReader(filename);
             properties.load(reader);
+        } catch (IOException e) {
+            throw new IllegalSerializationException("Can not deserialize. Detail info: " + e.getMessage());
         } finally {
             if (reader != null)
-                reader.close();
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
 
         Method methods[] = clazz.getDeclaredMethods();
@@ -60,7 +74,11 @@ public class ReflectionDeSerializer {
             String value = properties.getProperty(name);
 
             Class<?> cl = method.getParameterTypes()[0];
-            method.invoke(object, getObjectByStringValue(cl, value));
+            try {
+                method.invoke(object, getObjectByStringValue(cl, value));
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw new IllegalSerializationException("Can not deserialize. Detail info: " + e.getMessage());
+            }
 
         }
 

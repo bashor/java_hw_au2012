@@ -1,12 +1,14 @@
 package ru.spbau.bashorov.task6;
 
+import java.io.FileNotFoundException;
+
 /**
  * Start class
  */
 public class Main {
 
     /**
-     * Start point
+     * Entry point
      * @param args filename to update avgGrade or nothing to create example
      */
     public static void main(String[] args) {
@@ -16,16 +18,16 @@ public class Main {
             } else {
                 increaseAvgGrade(args[0]);
             }
-        } catch (Exception e) {
+        } catch (IllegalSerializationException | FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 
     /**
      * Create file with example object
-     * @throws Exception
+     * @throws IllegalSerializationException
      */
-    public static void createExampleFile() throws Exception {
+    public static void createExampleFile() throws IllegalSerializationException {
         ReflectionSerializer s = new ReflectionSerializer();
         Student st = new Student();
         st.setAge(0x19);
@@ -39,16 +41,15 @@ public class Main {
     /**
      * Increase avgGrade in file
      * @param filename to update
-     * @throws Exception
+     * @throws IllegalSerializationException, FileNotFoundException
      */
-    public static void increaseAvgGrade(String filename) throws Exception {
+    public static void increaseAvgGrade(String filename) throws IllegalSerializationException, FileNotFoundException {
         ReflectionDeSerializer d = new ReflectionDeSerializer();
-        Student sn = d.deserialize(filename, Student.class);
+        Student student = d.deserialize(filename, Student.class);
 
-        sn.avgGrade = Math.min(5.0, sn.avgGrade + 1.0);
+        student.avgGrade = Math.min(5.0, student.avgGrade + 1.0);
 
         ReflectionSerializer s = new ReflectionSerializer();
-        s.serialize(sn, filename);
-
+        s.serialize(student, filename);
     }
 }
