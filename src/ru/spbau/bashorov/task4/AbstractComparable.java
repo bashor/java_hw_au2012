@@ -12,7 +12,7 @@ public class AbstractComparable<T extends java.lang.Comparable<T>> implements Co
 
     /**
      * Initializes a newly created object.
-     * @param value assign to object value field
+     * @param value assign to value field of object
      */
     public AbstractComparable(final T value) {
         this.value = value;

@@ -4,11 +4,11 @@ package ru.spbau.bashorov.task6;
  * Student bean
  */
 public class Student {
-    String name;
-    String surname;
-    int age;
-    double avgGrade;
-    char charProp;
+    private String name;
+    private String surname;
+    private int age;
+    private double avgGrade;
+    private char charProp;
 
     /**
      * @return name value

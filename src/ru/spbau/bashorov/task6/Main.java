@@ -47,7 +47,7 @@ public class Main {
         ReflectionDeSerializer d = new ReflectionDeSerializer();
         Student student = d.deserialize(filename, Student.class);
 
-        student.avgGrade = Math.min(5.0, student.avgGrade + 1.0);
+        student.setAvgGrade(Math.min(5.0, student.getAvgGrade() + 1.0));
 
         ReflectionSerializer s = new ReflectionSerializer();
         s.serialize(student, filename);
