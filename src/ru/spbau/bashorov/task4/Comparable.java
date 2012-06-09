@@ -1,16 +1,23 @@
 package ru.spbau.bashorov.task4;
 
 /**
- * Privides interface for comparable objects
+ * Provides interface for comparable objects
+ *
+ * @param <T> the type of compared objects
+ *
+ * @author Zalim Bashorov
  */
 public interface Comparable<T> {
     /**
      * Compares the current(this) object with object from param
      *
-     * @param x - the passed object
-     * @return 1 if this object greater then x,
-     *         0 if this object equal to x,
-     *         -1 if this object lesser then x,
+     * @param x the object to be compared.
+     * @return  a negative integer, zero, or a positive integer as this object
+     *          is less than, equal to, or greater than the specified object.
+     *
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException if the specified object's type prevents it
+     *         from being compared to this object.
      */
     int compareTo(T x);
 }

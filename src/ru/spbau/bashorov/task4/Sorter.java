@@ -3,13 +3,21 @@ package ru.spbau.bashorov.task4;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 3/20/12
- * Time: 4:17 PM
+ * Interface for sorting algorithms.
+ * @author Zalim Bashorov
  */
 public interface Sorter {
+    /**
+     * Sorts the {@code List<T>}.
+     * @param <T> comparable type
+     * @param list the sort list
+     */
     public <T extends Comparable<? super T>> void sort(List<T> list);
 
-    public <T> void sort(List<T> list, Comparator<T> c);
+    /**
+     * Sorts the {@code List<T>}.
+     * @param list the sort list
+     * @param comparator comparator providing comparing
+     */
+    public <T> void sort(List<T> list, Comparator<T> comparator);
 }

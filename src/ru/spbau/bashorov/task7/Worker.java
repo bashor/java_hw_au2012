@@ -4,7 +4,6 @@ import java.util.Queue;
 import java.util.Random;
 
 public class Worker extends Thread {
-
     private final Queue<Task> queue;
 
     /**
@@ -34,17 +33,17 @@ public class Worker extends Thread {
                 task = queue.poll();
             }
 
-            synchronized (task) { //Synchronization on local variable 'task'???
+            synchronized (task) {
                 try {
                     Thread.sleep(50 + new Random().nextInt(100));
                 } catch (InterruptedException e) {
                     synchronized (queue) {
                         queue.add(task);
-                        queue.notifyAll();
+                        queue.notify();
                     }
                     continue;
                 }
-                task.setResult(task.value + 1);
+                task.setResult(task.getValue() + 1);
                 task.notify();
             }
         }

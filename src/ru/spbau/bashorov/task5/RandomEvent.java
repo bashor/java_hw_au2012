@@ -3,18 +3,16 @@ package ru.spbau.bashorov.task5;
 import java.util.Random;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 6/5/12
- * Time: 7:18 AM
  * RandomEvent ready for action if random integer is even
+ *
+ * @author Zalim Bashorov
  */
 public class RandomEvent extends Event{
-    Random random = new Random();
+    private static Random random = new Random();
 
     @Override
     public boolean ready() {
-        return random.nextInt() % 2 == 0;
+        return random.nextBoolean();
     }
 
 }

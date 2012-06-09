@@ -4,32 +4,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 3/20/12
- * Time: 4:18 PM
+ * The implementation of the algorithm HeapSort ShakerSort
+ * @author Zalim Bashorov
  */
-public class ShakerSort implements Sorter {
-
+public class ShakerSort extends SorterBase {
     /**
-     * Sorts the list of comparable type.
-     *
-     * @param list - the sort list
-     */
-    @Override
-    public <T extends Comparable<? super T>> void sort(List<T> list) {
-        sort(list, new Comparator<T>() {
-            public int compare(T t1, T t2) {
-                return t1.compareTo(t2);
-            }
-        });
-    }
-
-    /**
-     * Sorts the list of comparable type.
-     *
-     * @param list       - the sort list
-     * @param comparator - comparator providing comparing
+     * Sorts the {@code List<T>}.
+     * @param list the sort list
+     * @param comparator comparator providing comparing
      */
     @Override
     public <T> void sort(List<T> list, Comparator<T> comparator) {
@@ -43,7 +25,7 @@ public class ShakerSort implements Sorter {
             swapped = false;
             for (int i = begin; i != end; ) {
                 int j = i + p;
-                if (comparator.compare(list.get(i), list.get(j)) == p) {
+                if (signof(comparator.compare(list.get(i), list.get(j))) == p) {
                     Collections.swap(list, i, j);
                     swapped = true;
                 }
@@ -57,5 +39,9 @@ public class ShakerSort implements Sorter {
             begin = end;
             end = t;
         } while (swapped);
+    }
+
+    private int signof(int value) {
+        return value > 0 ? 1 : value < 0 ? -1 : 0;
     }
 }

@@ -3,33 +3,15 @@ package ru.spbau.bashorov.task4;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 3/20/12
- * Time: 4:19 PM
+/***
+ * The implementation of the algorithm HeapSort
+ * @author Zalim Bashorov
  */
-public class HeapSort implements Sorter {
+public class HeapSort extends SorterBase {
     /**
-     * Sorts the list of comparable type.
-     *
-     * @param list - the sort list
-     */
-    @Override
-    public <T extends Comparable<? super T>> void sort(List<T> list) {
-        sort(list, new Comparator<T>() {
-            @Override
-            public int compare(T t1, T t2) {
-                return t1.compareTo(t2);
-            }
-        });
-    }
-
-    /**
-     * Sorts the list of comparable type.
-     *
-     * @param list       - the sort list
-     * @param comparator - comparator providing comparing
+     * Sorts the {@code List<T>}.
+     * @param list the sort list
+     * @param comparator comparator providing comparing
      */
     @Override
     public <T> void sort(List<T> list, Comparator<T> comparator) {
@@ -61,11 +43,11 @@ public class HeapSort implements Sorter {
         int r = right(i);
 
         int great = i;
-        if (l < size && comparator.compare(list.get(l), list.get(i)) == 1) {
+        if (l < size && comparator.compare(list.get(l), list.get(i)) > 0) {
             great = l;
         }
 
-        if (r < size && comparator.compare(list.get(r), list.get(great)) == 1) {
+        if (r < size && comparator.compare(list.get(r), list.get(great)) > 0) {
             great = r;
         }
 

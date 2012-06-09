@@ -1,5 +1,7 @@
 package ru.spbau.bashorov.task3;
 
+import java.util.HashMap;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zalim
@@ -8,8 +10,9 @@ package ru.spbau.bashorov.task3;
  * To change this template use File | Settings | File Templates.
  */
 public class Parentheses implements Expression {
+
     @Override
-    public int evaluate() {
+    public int evaluate(HashMap<String, Expression> context) {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

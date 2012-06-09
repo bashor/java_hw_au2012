@@ -3,6 +3,10 @@ package ru.spbau.bashorov.task7;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ *
+ * @author Zalim Bashorov
+ */
 public class DistributedIncrementor {
     private final Queue<Task> queue = new LinkedList<>();
 
@@ -14,20 +18,20 @@ public class DistributedIncrementor {
      * @throws InterruptedException if interrupted
      */
     public int increment(int value) throws InterruptedException {
-        final Task task = new Task(value); //Synchronization on local variable 'task'???
+        final Task task = new Task(value);
 
         synchronized (queue) {
             queue.add(task);
-            queue.notifyAll();
+            queue.notify();
         }
 
         synchronized (task) {
-            while (!task.isDone) {
+            while (!task.isDone()) {
                 task.wait();
             }
         }
 
-        return task.result;
+        return task.getResult();
     }
 
     public DistributedIncrementor(int workerCount) {

@@ -4,10 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 6/5/12
- * Time: 7:27 AM
+ *
+ * @author Zalim Bashorov
  */
 public class Main {
     /**

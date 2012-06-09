@@ -3,14 +3,15 @@ package ru.spbau.bashorov.task4;
 import java.util.Random;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 6/5/12
- * Time: 1:35 AM
+ * Factory of ComparableInteger objects with random Integer value
+ * @author Zalim Bashorov
  */
 public class RandomComparableIntegerFactory implements Factory<ComparableInteger> {
-    private Random random = new Random();
+    private static final Random random = new Random();
 
+    /**
+     * @return new ComparableInteger object with random Integer value
+     */
     @Override
     public ComparableInteger create() {
         return new ComparableInteger(random.nextInt());

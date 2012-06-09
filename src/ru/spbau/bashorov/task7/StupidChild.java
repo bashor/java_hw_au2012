@@ -41,19 +41,26 @@ public class StupidChild extends Thread {
      */
     public void run() {
         System.out.println("StupidChild " + id + " is started");
+        boolean interrupted = false;
+
         for (int n : numbers) {
-            String s = String.format("%d\t%d\t->\t", id, n);
+            if (interrupted = Thread.interrupted())
+                return;
+
+            int after;
             try {
                 Thread.sleep(10);
-                int after = incrementor.increment(n);
-                s += Integer.toString(after);
-                Thread.yield();
+                after = incrementor.increment(n);
             } catch (InterruptedException e) {
-                s += "interrupted";
-                continue;
+                interrupted = true;
+                return;
             }
-            System.out.println(s);
+
+            Thread.yield();
+
+            System.out.printf("[%d]\t%d\t->\t%d\n", id, n, after);
         }
-    }
+        System.out.println("StupidChild " + id + " is " + (interrupted ? "interrupted" : "finished"));
+   }
 
 }

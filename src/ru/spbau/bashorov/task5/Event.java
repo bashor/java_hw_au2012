@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 6/5/12
- * Time: 7:13 AM
- *
  * Base class for events
+ *
+ * @author Zalim Bashorov
  */
 public abstract class Event {
-    final private List<ActionListener> listeners = new ArrayList<ActionListener>();
+    private final List<ActionListener> listeners = new ArrayList<ActionListener>();
 
     /**
      * Get the event ready status
@@ -23,7 +20,7 @@ public abstract class Event {
     /**
      * Perform action for all listeners
      */
-    protected void fireEvent() {
+    public void fireEvent() {
         for (ActionListener listener : listeners) {
             listener.performAction(this);
         }
@@ -32,9 +29,13 @@ public abstract class Event {
     /**
      * Add(subscribe to event) new listener
      * @param actionListener - new listener
+     *
+     * @exception IllegalArgumentException ???
      */
     public void addListener(ActionListener actionListener) {
         if (actionListener != null)
-            listeners.add(actionListener);
+            throw new IllegalArgumentException("actionListener is null");
+
+        listeners.add(actionListener);
     }
 }

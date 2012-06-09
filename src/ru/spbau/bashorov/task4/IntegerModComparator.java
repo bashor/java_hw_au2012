@@ -1,21 +1,31 @@
 package ru.spbau.bashorov.task4;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 3/20/12
- * Time: 4:12 PM
+ * Comparing by mod
+ * @author Zalim Bashorov
  */
 
 public class IntegerModComparator implements Comparator<ComparableInteger> {
-    final int n;
+    private final int n;
 
+    /**
+     * Create new instance with mod value
+     * @param n mod value
+     */
     public IntegerModComparator(int n) {
         this.n = n;
     }
 
+    /**
+     * Compare two objects by mod value
+     * @param  x the first object to compare
+     * @param  y the second object to compare
+     * @return the value {@code 0} if {@code x % n == y % n };
+     *         a value less than {@code 0} if {@code x % n < y % n}; and
+     *         a value greater than {@code 0} if {@code x % n > y % n}
+     */
     @Override
     public int compare(ComparableInteger x, ComparableInteger y) {
-        return x.mod(n).compareTo(y.mod(n));
+        return (new Integer(x.getValue() % n)).compareTo(y.getValue() % n);
     }
 }
