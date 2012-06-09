@@ -2,6 +2,10 @@ package ru.spbau.bashorov.task7;
 
 import java.util.Random;
 
+/**
+ * Client of DistributedIncrementor(Incrementing service)
+ * @author Zalim Bashorov
+ */
 public class StupidChild extends Thread {
 
     private int[] numbers;
@@ -10,12 +14,11 @@ public class StupidChild extends Thread {
 
     /**
      * Constructor with constraints
-     *
      * @param incrementor  link to service
-     * @param id           of the thread
+     * @param id of the thread
      * @param numbersCount count for generated numbers
-     * @param randomMin    minimum value for generated numbers
-     * @param randomMax    maximum value for generated numbers
+     * @param randomMin minimum value for generated numbers
+     * @param randomMax maximum value for generated numbers
      */
     public StupidChild(DistributedIncrementor incrementor, int id, int numbersCount, int randomMin, int randomMax) {
         if (randomMin > randomMax) {
@@ -45,7 +48,7 @@ public class StupidChild extends Thread {
 
         for (int n : numbers) {
             if (interrupted = Thread.interrupted())
-                return;
+                break;
 
             int after;
             try {
@@ -53,7 +56,7 @@ public class StupidChild extends Thread {
                 after = incrementor.increment(n);
             } catch (InterruptedException e) {
                 interrupted = true;
-                return;
+                break;
             }
 
             Thread.yield();

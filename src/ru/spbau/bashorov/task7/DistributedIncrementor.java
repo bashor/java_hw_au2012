@@ -4,17 +4,16 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- *
+ * Provide incrementing services use some workers
  * @author Zalim Bashorov
  */
 public class DistributedIncrementor {
     private final Queue<Task> queue = new LinkedList<>();
 
     /**
-     * Increment value one
-     *
+     * Increment value
      * @param value to increment
-     * @return value + 1
+     * @return incremented value
      * @throws InterruptedException if interrupted
      */
     public int increment(int value) throws InterruptedException {
@@ -34,6 +33,10 @@ public class DistributedIncrementor {
         return task.getResult();
     }
 
+    /**
+     * Construct new incrementing service provider({@code DistributedIncrementor}) with {@code workerCount} workers
+     * @param workerCount workers count
+     */
     public DistributedIncrementor(int workerCount) {
         for (int i = 0; i < workerCount; i++) {
             new Worker(queue);

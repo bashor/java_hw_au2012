@@ -1,10 +1,8 @@
 package ru.spbau.bashorov.task7;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zalim
- * Date: 6/5/12
- * Time: 5:19 AM
+ * Multithreaded computing
+ * @author Zalim Bashorov
  */
 public class Main {
     private static final int WORKER_COUNT = 5;
@@ -14,8 +12,7 @@ public class Main {
     private static final int RANDOM_MAX = 1000;
 
     /**
-     * Start point
-     *
+     * Entry point
      * @param args not used
      */
     public static void main(String args[]) {
