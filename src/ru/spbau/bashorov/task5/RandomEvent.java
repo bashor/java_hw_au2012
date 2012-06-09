@@ -10,6 +10,9 @@ import java.util.Random;
 public class RandomEvent extends Event{
     private static Random random = new Random();
 
+    /**
+     * @return random ready state
+     */
     @Override
     public boolean ready() {
         return random.nextBoolean();

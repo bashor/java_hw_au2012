@@ -1,23 +1,22 @@
 package ru.spbau.bashorov.task5;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
- * Time event -- ready for action every 10 secs
+ * Time event -- ready for action every 10 secs after last fire
  *
  * @author Zalim Bashorov
  */
 public class TimeEvent extends Event {
     private static final int TIME_AFTER_RESTORE_READY = 10000;
-
-    private long lastFireTime;
+    private long lastFireTime = System.currentTimeMillis();
 
     public void fireEvent() {
         lastFireTime = System.currentTimeMillis();
         super.fireEvent();
     }
 
+    /**
+     * @return true ready state If after last event has been more than 10 sec
+     */
     @Override
     public boolean ready() {
         return System.currentTimeMillis() - lastFireTime >= TIME_AFTER_RESTORE_READY;

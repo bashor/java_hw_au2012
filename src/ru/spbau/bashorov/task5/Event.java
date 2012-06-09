@@ -9,7 +9,7 @@ import java.util.List;
  * @author Zalim Bashorov
  */
 public abstract class Event {
-    private final List<ActionListener> listeners = new ArrayList<ActionListener>();
+    private final List<ActionListener> listeners = new ArrayList<>();
 
     /**
      * Get the event ready status
@@ -30,7 +30,7 @@ public abstract class Event {
      * Add(subscribe to event) new listener
      * @param actionListener - new listener
      *
-     * @exception IllegalArgumentException ???
+     * @exception IllegalArgumentException when actionListener is null
      */
     public void addListener(ActionListener actionListener) {
         if (actionListener != null)

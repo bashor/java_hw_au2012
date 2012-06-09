@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ * Create RandomEvent and TimeEvent Objects, add ActionListener Objects to events, process the events
  * @author Zalim Bashorov
  */
 public class Main {

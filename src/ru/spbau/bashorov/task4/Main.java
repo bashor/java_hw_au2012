@@ -1,7 +1,6 @@
 package ru.spbau.bashorov.task4;
 
 /**
- *
  * @author Zalim Bashorov
  */
 public class Main {
